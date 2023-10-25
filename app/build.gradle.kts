@@ -80,6 +80,15 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    implementation("androidx.hilt:hilt-work:1.0.0")
+            //   kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+    val lifecycle_version = "2.6.2"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+    implementation ("com.google.dagger:hilt-android:2.47")
+            //kapt ("com.google.dagger:hilt-compiler:2.47")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
 
     compose()
     hilt()
