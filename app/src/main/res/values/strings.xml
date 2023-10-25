@@ -3,4 +3,9 @@
 
     <string name="volunteer" translatable="false">VOLUNTEER</string>
     <string name="admin" translatable="false">ADMIN</string>
+
+    <string name = "placeholder_phone_text">Номер телефона</string>
+    <string name = "placeholder_password">Пароль</string>
+    <string name = "support_text_password">Пароль должен занимать 6-20 символов</string>
+    <string name="placeholder_invite_key">Пригласительный код</string>
 </resources>

@@ -5,4 +5,14 @@ fun isPasswordValid(password: String): Boolean {
     return password.length <= 20
 }
 
+fun isEqualPasswords(first: String, second: String) : Boolean {
+    return first == second
+}
 
+fun isPhoneValid(phone: String): Boolean {
+    return phone.length == 9
+}
+
+fun isInviteKeyValid(key: String): Boolean {
+    return key.length <= 20
+}
