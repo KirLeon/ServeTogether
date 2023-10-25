@@ -82,9 +82,10 @@ dependencies {
 
 
     compose()
-    room()
     hilt()
     coroutines()
     viewModel()
     retrofit()
+    glide()
+    timber()
 }

@@ -32,6 +32,12 @@ object Dependencies {
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModel}"
     const val viewModelLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.viewModel}"
 
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    const val glideCompose = "com.github.bumptech.glide:compose:${Versions.glideCompose}"
+
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     const val shimmerEffect = "androidx.core:core-splashscreen:${Versions.shimmerEffect}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
@@ -88,6 +94,16 @@ fun DependencyHandler.gson(){
 
 fun DependencyHandler.shimmerEffect(){
     implementation(Dependencies.shimmerEffect)
+}
+
+fun DependencyHandler.glide(){
+    implementation(Dependencies.glide)
+    implementation(Dependencies.glideCompose)
+    annotationProcessor(Dependencies.glideCompiler)
+}
+
+fun DependencyHandler.timber(){
+    implementation(Dependencies.timber)
 }
 
 //пример подключения модуля к другому модулю
