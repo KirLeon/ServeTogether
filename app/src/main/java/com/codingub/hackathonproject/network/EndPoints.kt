@@ -5,6 +5,7 @@ package com.codingub.hackathonproject.network
  */
 object EndPoints {
 
-
-
+    const val SIGNUP = "/registration/"
+    const val SIGNIN = "/authorize/"
+    const val AUTHENTICATE = "/.../"
 }
