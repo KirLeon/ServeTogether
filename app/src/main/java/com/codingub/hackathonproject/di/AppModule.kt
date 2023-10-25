@@ -14,6 +14,9 @@ import javax.inject.Singleton
 class AppModule {
 
 
+    /**
+     *  Networking
+     */
     @Provides
     @Singleton
     fun provideHistoryAppService(networking: AppNetworking) : AppApi =
