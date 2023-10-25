@@ -1,5 +1,6 @@
 package com.codingub.hackathonproject.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,8 +16,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        private var Instance: MainActivity? = null
+        fun getInstance(): MainActivity = Instance!!
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Instance = this
         setContent {
             HackathonProjectTheme {
                 // A surface container using the 'background' color from the theme
