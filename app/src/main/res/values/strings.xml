@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">HackathonProject</string>
+
+    <string name="volunteer" translatable="false">VOLUNTEER</string>
+    <string name="admin" translatable="false">ADMIN</string>
 </resources>

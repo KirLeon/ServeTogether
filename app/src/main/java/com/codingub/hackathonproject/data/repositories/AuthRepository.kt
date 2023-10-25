@@ -1,9 +1,12 @@
 package com.codingub.hackathonproject.data.repositories
 
+import com.codingub.hackathonproject.data.local.UserConfig
 import com.codingub.hackathonproject.data.remote.AppApi
+import com.codingub.hackathonproject.data.remote.requests.InviteKeyRequest
 import com.codingub.hackathonproject.data.remote.requests.LoginDataRequest
 import com.codingub.hackathonproject.data.remote.requests.RegisterDataRequest
 import com.codingub.hackathonproject.network.AuthResult
+import com.codingub.hackathonproject.network.ServerResponse
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -12,6 +15,7 @@ import javax.inject.Inject
  */
 interface AuthRepository {
 
+    suspend fun provideInviteKey(request: InviteKeyRequest) : ServerResponse<Unit>
     suspend fun signUp(request: RegisterDataRequest): AuthResult<Unit>
     suspend fun signIn(request: LoginDataRequest): AuthResult<Unit>
     suspend fun authenticate(): AuthResult<Unit>
@@ -21,6 +25,23 @@ interface AuthRepository {
 class AuthRepositoryImpl @Inject constructor(
     private val api: AppApi
 ) : AuthRepository{
+
+    override suspend fun provideInviteKey(request: InviteKeyRequest) : ServerResponse<Unit> {
+        return try {
+            api.provideInviteKey(request)
+            ServerResponse.OK()
+        } catch (e: HttpException){
+           if (e.code() == 400) {
+                ServerResponse.BadRequest(e.response()?.errorBody()?.string() ?: "Unknown error")
+            } else if (e.code() == 404){
+                ServerResponse.NotFound()
+            } else {
+                ServerResponse.UnknownError()
+            }
+        } catch (e: Exception){
+            ServerResponse.UnknownError()
+        }
+    }
 
     override suspend fun signUp(request: RegisterDataRequest): AuthResult<Unit> {
         return try {
@@ -46,7 +67,17 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun signIn(request: LoginDataRequest): AuthResult<Unit> {
         return try {
-            api.signIn(request)
+            val response = api.signIn(request)
+
+            UserConfig.apply {
+                setToken(response.token)
+                setUsername(response.username)
+                setPhoneNumber(response.phoneNumber)
+
+                //test!!!
+                setUserRole(response.userRole)
+            }
+
             AuthResult.Authorized()
         } catch (e: HttpException){
             if (e.code() == 401) {

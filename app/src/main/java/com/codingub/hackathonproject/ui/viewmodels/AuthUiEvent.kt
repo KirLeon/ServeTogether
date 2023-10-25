@@ -5,6 +5,7 @@ sealed class RegistrationUiEvent {
     data class SignUpUsernameChanged(val value: String) : RegistrationUiEvent()
     data class SignUpPasswordChanged(val value: String) : RegistrationUiEvent()
     data class SignUpPhoneNumberChanged(val value: String) : RegistrationUiEvent()
+    data class UseInviteKey(val value: String) :  RegistrationUiEvent()
     object SignUp : RegistrationUiEvent()
 }
 
@@ -16,7 +17,7 @@ sealed class LoginUiEvent {
 }
 
 sealed class InviteKeyEvent {
-    data class InviteLeyChanged(val value: String): LoginUiEvent()
-    object ProvideInviteKey: LoginUiEvent()
+    data class InviteKeyChanged(val value: String): InviteKeyEvent()
+    object ProvideInviteKey: InviteKeyEvent()
 
 }

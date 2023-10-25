@@ -40,7 +40,9 @@ class RegistrationViewModel @Inject constructor(
                 state = state.copy(signUpPhoneNumber = event.value)
 
             }
-
+            is RegistrationUiEvent.UseInviteKey -> {
+                state = state.copy(inviteKey = event.value)
+            }
             is RegistrationUiEvent.SignUp -> {
                 signUp()
             }
@@ -54,7 +56,8 @@ class RegistrationViewModel @Inject constructor(
                 RegisterDataRequest(
                     username = state.signUpUsername,
                     password = state.signUpPassword,
-                    phoneNumber = state.signUpPhoneNumber
+                    phoneNumber = state.signUpPhoneNumber,
+                    inviteKey = state.inviteKey
                 )
             )
             resultChannel.send(result)

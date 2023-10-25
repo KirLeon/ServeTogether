@@ -2,7 +2,9 @@ package com.codingub.hackathonproject.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import com.codingub.hackathonproject.MainApp
+import com.codingub.hackathonproject.sdk.UserRole
 
 object UserConfig {
 
@@ -10,7 +12,6 @@ object UserConfig {
     private val key_user_type = "user_type"
 
     private val key_user_username = "user_username"
-    private val key_user_password = "user_password"
     private val key_user_phonenumber = "user_phonenumber"
 
     private val prefs: SharedPreferences =
@@ -20,7 +21,9 @@ object UserConfig {
         )
     private val editor: SharedPreferences.Editor get() = prefs.edit()
 
-    // аутентификация
+    /*
+        Token
+     */
     private var token: String = ""
 
     fun getToken(): String = prefs.getString(key_user_token, "") ?: ""
@@ -28,7 +31,9 @@ object UserConfig {
         token = value
         editor.putString(key_user_token, token).commit()
     }
-
+    /*
+        Username
+     */
     private var username : String = ""
 
     fun getUsername(): String = prefs.getString(key_user_username, "") ?: ""
@@ -37,19 +42,26 @@ object UserConfig {
         editor.putString(key_user_username, username).commit()
     }
 
-    private var password : String = ""
-
-    fun getPassword(): String = prefs.getString(key_user_password, "") ?: ""
-    fun setPassword(value: String) {
-        password = value
-        editor.putString(key_user_password, password).commit()
-    }
-
+    /*
+        PhoneNumber
+     */
     private var phoneNumber : String = ""
 
     fun getPhoneNumber(): String = prefs.getString(key_user_phonenumber, "") ?: ""
     fun setPhoneNumber(value: String) {
         phoneNumber = value
-        editor.putString(key_user_password, phoneNumber).commit()
+        editor.putString(key_user_phonenumber, phoneNumber).commit()
+    }
+
+    /*
+        UserRole
+     */
+    private var savedUserRole : MutableLiveData<UserRole> =
+        MutableLiveData(UserRole.valueOf(prefs.getString(key_user_type, UserRole.VOLUNTEER.name)!!))
+
+    fun getUserRole() : UserRole = savedUserRole.value!!
+    fun setUserRole(userRole: UserRole){
+        savedUserRole.value = userRole
+        editor.putString(key_user_type, userRole.name).apply()
     }
 }

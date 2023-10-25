@@ -4,6 +4,7 @@ data class RegisterState(
     val signUpUsername: String = "",
     val signUpPassword: String = "",
     val signUpPhoneNumber: String = "",
+    val inviteKey: String = ""
 )
 
 data class LoginState(
@@ -14,4 +15,5 @@ data class LoginState(
 data class InviteKeyState(
     val inviteKey: String = ""
 )
+
 
