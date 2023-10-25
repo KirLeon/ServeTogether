@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.codingub.hackathonproject.ui.screens.AuthorizationScreen
+import com.codingub.hackathonproject.ui.screens.CodeRegistrationScreen
 import com.codingub.hackathonproject.ui.theme.HackathonProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,30 +30,15 @@ class MainActivity : ComponentActivity() {
         Instance = this
         setContent {
             HackathonProjectTheme {
-                // A surface container using the 'background' color from the theme
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+
                 ) {
-                    Greeting("Android")
+                    CodeRegistrationScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HackathonProjectTheme {
-        Greeting("Android")
-    }
-}
