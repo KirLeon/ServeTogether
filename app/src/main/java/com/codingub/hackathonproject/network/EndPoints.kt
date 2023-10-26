@@ -11,7 +11,7 @@ object EndPoints {
     const val SIGNUP = "/api/v1/signup/user"
     const val PROVIDE_INVITE_KEY = "/api/v1/signup/key"
 
-    const val SIGNIN = "/api/v1/authorize"
+    const val SIGNIN = "/api/v1/authorization"
 
     const val AUTHENTICATE = "/api/v1/auth"
 

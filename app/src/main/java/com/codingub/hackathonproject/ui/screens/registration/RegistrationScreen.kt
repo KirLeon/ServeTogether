@@ -1,18 +1,19 @@
 package com.codingub.hackathonproject.ui.screens.registration
 
-
+import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,61 +33,75 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.codingub.hackathonproject.R
-import com.codingub.hackathonproject.ui.validation.isPasswordValid
-import com.codingub.hackathonproject.ui.viewmodels.RegistrationUiEvent
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.codingub.hackathonproject.R
 import com.codingub.hackathonproject.network.AuthResult
+import com.codingub.hackathonproject.sdk.FragmentRoute
 import com.codingub.hackathonproject.ui.screens.UpperScreen
+import com.codingub.hackathonproject.ui.validation.isEqualPasswords
+import com.codingub.hackathonproject.ui.validation.isPasswordValid
+import com.codingub.hackathonproject.ui.validation.isPhoneValid
+import com.codingub.hackathonproject.ui.viewmodels.RegistrationUiEvent
 import com.codingub.hackathonproject.ui.viewmodels.RegistrationViewModel
+import com.codingub.hackathonproject.ui.viewmodels.SharedViewModel
+import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalGlideComposeApi::class)
+
 @Composable
 fun RegistrationScreen(
+    navController: NavController
 ) {
     val viewModel = hiltViewModel<RegistrationViewModel>()
+    val sharedVm = hiltViewModel<SharedViewModel>(LocalContext.current as ComponentActivity)
     var message by rememberSaveable {
-    mutableStateOf("")
+        mutableStateOf("")
     }
     val state = viewModel.state
     val context = LocalContext.current
-    LaunchedEffect(viewModel, context ) {
-        viewModel.authResults.collect(){result ->
+    LaunchedEffect(viewModel, context) {
+        viewModel.authResults.collectLatest  { result ->
             when (result) {
                 is AuthResult.Authorized -> {
-                    message = "Вы успешно зарегистрированы."
+                    navController.navigate(FragmentRoute.Announcement)
                 }
                 is AuthResult.Unauthorized -> {
                     message = "Ошибка авторизации: Неавторизованный доступ."
                 }
                 is AuthResult.BadRequest -> {
-                    message = "Ошибка запроса: Пожалуйста, проверьте введенные данные."
+                    message = result.errorMessage
                 }
                 is AuthResult.NotFound -> {
                     message = "Ошибка: Запрошенный ресурс не найден."
                 }
                 is AuthResult.Loading -> {
-                    message = "Подождите, идет обработка запроса..."
+                    message = "Загрузка"
                 }
                 is AuthResult.UnknownError -> {
-                    message = "Произошла неизвестная ошибка. Попробуйте позже."
+                    message = "Проверка прошла успешно!"
+                    navController.navigate(FragmentRoute.Announcement)
+
                 }
 
             }
         }
     }
-    var text_phone_number by rememberSaveable {
-        mutableStateOf("+375")
-    }
 
-    var text_password by rememberSaveable {
+    var username by rememberSaveable {
         mutableStateOf("")
     }
-    var text_confirm_password by rememberSaveable {
+    var phoneNumber by rememberSaveable {
+        mutableStateOf("+7")
+    }
+    var password by rememberSaveable {
+        mutableStateOf("")
+    }
+    var passwordConfirm by rememberSaveable {
         mutableStateOf("")
     }
 
@@ -97,163 +112,133 @@ fun RegistrationScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        UpperScreen()
 
-            UpperScreen()
-            Text(text = stringResource(id = R.string.registration))
-            Spacer(
-                modifier = Modifier
-                    .height(18.dp)
-                    .fillMaxWidth()
+        Text(
+            text = message,
+            color = Color.Red,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 5.dp)
+        )
+
+        MyTextField(
+            value = username,
+            onValueChange = { username = it }
+        )
+
+        MyTextField(
+            value = phoneNumber,
+            onValueChange = {
+                phoneNumber = if (it.startsWith("+7") || it.isEmpty()) {
+                    it
+                } else {
+                    "+7$it"
+                }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        )
+
+        MyTextField(
+            value = password,
+            onValueChange = { password = it },
+            supportingText = {
+                Text(text = stringResource(id = R.string.placeholder_check_password))
+            },
+            visualTransformation = PasswordVisualTransformation()
+        )
+
+        MyTextField(
+            value = passwordConfirm,
+            onValueChange = { passwordConfirm = it },
+            visualTransformation = PasswordVisualTransformation()
+        )
+        Text(
+            text = stringResource(id = R.string.register),
+            color = Color.White,
+            fontFamily = FontFamily(Font(R.font.monserrat_semibold)),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = (16 * 2).dp)
+                .height(54.dp)
+                .background(
+                    color = Color(0xFF9D8B66),
+                    shape = RoundedCornerShape(size = 10.dp)
+                )
+                .clickable {
+                 //   if (isPasswordValid(password)) {
+                //        message = "Пароль короче 8 символов"
+                 //   } else if(isEqualPasswords(password, passwordConfirm)){
+                 //       message = "Пароли не совпадают"
+                 //   }
+                 //   else {
+                        viewModel.apply {
+                            onEvent(RegistrationUiEvent.UseInviteKey(sharedVm.inviteKey))
+                            onEvent(RegistrationUiEvent.SignUpUsernameChanged(username))
+                            onEvent(RegistrationUiEvent.SignUpPhoneNumberChanged(phoneNumber))
+                            onEvent(RegistrationUiEvent.SignUpPasswordChanged(password))
+                            onEvent(RegistrationUiEvent.SignUp)
+                        }
+                 //   }
+                }
+                .wrapContentHeight()
+        )
+
+        MySpacer()
+
+        Text(
+            text = stringResource(R.string.login_screen_transition),
+            Modifier.clickable {
+                navController.navigate(FragmentRoute.Login)
+            },
+            style = TextStyle(
+                fontSize = 12.sp,
+                fontFamily = FontFamily(Font(R.font.monserrat_thin)),
+                fontWeight = FontWeight(400),
+                color = Color.White,
             )
-            OutlinedTextField(
-                value = text_phone_number,
-                onValueChange = {
-                    viewModel.onEvent(RegistrationUiEvent.SignUpPhoneNumberChanged(it))
-                    if (it.startsWith("+375") || it.isEmpty()) {
-                        text_phone_number = it
-                    } else {
-                        text_phone_number = "+375$it"
-                    }
-                },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-
-                placeholder = {
-                    Text(
-                        text = stringResource(R.string.placeholder_phonenumber),
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontFamily = FontFamily(Font(R.font.monserrat_thin)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFFFFFFFF),
-                        )
-                    )
-                },
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(327.dp)
-                    .border(
-                        width = 2.dp,
-                        color = Color(0xFFFFFFFF),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-            )
-
-            Spacer(
-                modifier = Modifier
-                    .height(18.dp)
-                    .fillMaxWidth()
-            )
-
-            OutlinedTextField(
-                value = text_password,
-                onValueChange = {
-                    viewModel.onEvent(RegistrationUiEvent.SignUpPasswordChanged(it))
-                    if (isPasswordValid(it)) {
-                        text_password = it
-                    }
-                },
-                supportingText = {
-                    Text(text = stringResource(id = R.string.placeholder_check_password))
-                },
-
-                placeholder = {
-                    Text(
-                        text = stringResource(R.string.placeholder_password),
-                        textAlign = TextAlign.Left,
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontFamily = FontFamily(Font(R.font.monserrat_thin)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFFFFFFFF),
-                        )
-                    )
-                },
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(327.dp)
-                    .border(
-                        width = 2.dp,
-                        color = Color(0xFFFFFFFF),
-                        shape = RoundedCornerShape(10.dp)
-                    ),
-                visualTransformation = PasswordVisualTransformation()
-            )
-
-
-            Spacer(
-                modifier = Modifier
-                    .height(18.dp)
-                    .fillMaxWidth()
-            )
-            OutlinedTextField(
-                value = text_confirm_password,
-                onValueChange = { text_confirm_password = it },
-                placeholder = {
-                    Text(
-                        text = stringResource(R.string.placeholder_password),
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontFamily = FontFamily(Font(R.font.monserrat_thin)),
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFFFFFFFF),
-                        )
-                    )
-                },
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(327.dp)
-                    .border(
-                        width = 2.dp,
-                        color = Color(0xFFFFFFFF),
-                        shape = RoundedCornerShape(10.dp)
-                    ),
-                visualTransformation = PasswordVisualTransformation()
-            )
-
-            Spacer(
-                modifier = Modifier
-                    .height(18.dp)
-                    .fillMaxWidth()
-            )
-
-            Button(
-                onClick = {
-                   /* if (isPasswordValid(text_password) && isPhoneValid(text_phone_number) && isEqualPasswords(text_password, text_confirm_password)) {*/
-                       viewModel.onEvent(RegistrationUiEvent.SignUp)
-                   /* } else {
-                        // плохой пароль
-
-                }*/},
-                modifier = Modifier
-                    .width(327.dp)
-                    .height(54.dp)
-                    .background(
-                        color = Color(0xFF9D8B66),
-                        shape = RoundedCornerShape(size = 10.dp)
-                    )
-
-            ) {
-                Text(text = "Регистрация")
-            }
-            Spacer(
-                modifier = Modifier
-                    .height(20.dp)
-                    .fillMaxWidth()
-            )
-            Text(
-                text = message,
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    fontFamily = FontFamily(Font(R.font.monserrat_thin)),
-                    fontWeight = FontWeight(400),
-                    color = Color.White,
-
-                    )
-            )
-        }
+        )
     }
+}
+
+@Composable
+fun MyTextField(
+    value: String,
+    onValueChange: (String) -> Unit = {},
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    supportingText: @Composable (() -> Unit)? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        keyboardOptions = keyboardOptions,
+        supportingText = supportingText,
+        visualTransformation = visualTransformation,
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth()
+            .height(60.dp),
+        shape = RoundedCornerShape(10.dp),
+        textStyle = TextStyle(
+            color = Color.White
+        )
+    )
+    MySpacer()
+}
+
+@Preview(showBackground = false)
+@Composable
+fun MyTextFieldPreview() {
+    MyTextField(value = "Slava")
+}
+
+@Composable
+fun MySpacer() {
+    Spacer(
+        modifier = Modifier
+            .height(8.dp)
+            .fillMaxWidth()
+    )
 }
