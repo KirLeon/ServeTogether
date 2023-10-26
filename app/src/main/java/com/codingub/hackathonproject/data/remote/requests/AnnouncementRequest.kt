@@ -5,7 +5,3 @@ data class AddAnnouncementRequest(
     val content: String,
     val reward: Long
     )
-
-data class DeleteAnnouncementRequest(
-    val test: String = "",
-    )

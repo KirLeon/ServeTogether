@@ -68,7 +68,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun signIn(request: LoginDataRequest): AuthResult<Unit> {
         return try {
-            val response = api.signIn(request)
+            val response = api.signIn(" ",request)
 
             UserConfig.apply {
                 setToken(response.authToken)

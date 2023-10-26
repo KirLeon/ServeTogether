@@ -8,6 +8,15 @@ data class Announcement(
     val title: String,
     val content: String,
     val status: AnnouncementStatus,
-    val expirationDate: Date,
+    val expirationDate: String,
+    val price: Long
+)
+
+data class ExtAnnouncement(
+    val id: Long,
+    val title: String,
+    val content: String,
+    val status: AnnouncementStatus,
+    val expirationDate: String,
     val price: Long
 )
