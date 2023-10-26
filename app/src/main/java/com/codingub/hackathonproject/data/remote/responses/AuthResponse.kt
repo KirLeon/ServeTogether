@@ -7,5 +7,5 @@ data class AuthorizedUserResponse(
     val phoneNumber: String,
     val userRole: UserRole,
 
-    val token: String
+    val authToken: String
 )

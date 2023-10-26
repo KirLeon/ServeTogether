@@ -32,7 +32,7 @@ interface AppApi{
 
     @GET(AUTHENTICATE)
     suspend fun authenticate(
-        @Header("Authorization") token: String
+        @Header("Authorization") authToken: String
     )
 
     @POST(PROVIDE_INVITE_KEY)
