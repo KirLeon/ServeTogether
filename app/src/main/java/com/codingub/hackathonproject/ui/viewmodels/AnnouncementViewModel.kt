@@ -36,6 +36,9 @@ class AnnouncementViewModel @Inject constructor(
             val result = getAllAnnouncementsUseCase()
             _resultChannel.send(result)
 
+
+
+
            // НЕОБХОДИМО ДОБАВИТЬ В is ServerResponse.OnSuccess -> {
         // announcements.value = result.data!! }
             //
