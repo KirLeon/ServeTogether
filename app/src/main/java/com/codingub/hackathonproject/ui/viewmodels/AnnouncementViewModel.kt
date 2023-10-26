@@ -22,7 +22,6 @@ import javax.inject.Inject
 @HiltViewModel
 class AnnouncementViewModel @Inject constructor(
     private val getAllAnnouncementsUseCase: GetAllAnnouncementsUseCase,
-    private val getAnnouncementByIdUseCase: GetAnnouncementByIdUseCase, //будет при выборе (коммуникация фрагментов)
     private val getAnnouncementSearchUseCase: GetAnnouncementSearchUseCase //!!!!!! добавить для searchBar
 ) : ViewModel() {
 

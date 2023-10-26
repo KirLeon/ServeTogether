@@ -47,7 +47,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun signIn() {
-        viewModelScope.launch(Dispatchers.IO)  {
+        viewModelScope.launch  {
             _resultChannel.send(AuthResult.Loading(true))
             val result = login(
                 LoginDataRequest(
@@ -60,7 +60,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun auth() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _resultChannel.send(AuthResult.Loading(true))
             val result = authenticate()
             _resultChannel.send(result)

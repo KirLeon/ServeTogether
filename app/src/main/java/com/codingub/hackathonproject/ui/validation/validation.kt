@@ -2,7 +2,7 @@ package com.codingub.hackathonproject.ui.validation
 
 
 fun isPasswordValid(password: String): Boolean {
-    return password.length <= 20
+    return password.length <= 8
 }
 
 fun isEqualPasswords(first: String, second: String) : Boolean {
