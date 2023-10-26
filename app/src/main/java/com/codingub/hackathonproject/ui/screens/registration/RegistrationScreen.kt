@@ -1,4 +1,4 @@
-package com.codingub.hackathonproject.ui.screens.Registration
+package com.codingub.hackathonproject.ui.screens.registration
 
 
 import androidx.compose.foundation.background
@@ -16,6 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -23,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -38,9 +40,8 @@ import com.codingub.hackathonproject.R
 import com.codingub.hackathonproject.ui.validation.isPasswordValid
 import com.codingub.hackathonproject.ui.viewmodels.RegistrationUiEvent
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.codingub.hackathonproject.network.AuthResult
 import com.codingub.hackathonproject.ui.screens.UpperScreen
-import com.codingub.hackathonproject.ui.validation.isEqualPasswords
-import com.codingub.hackathonproject.ui.validation.isPhoneValid
 import com.codingub.hackathonproject.ui.viewmodels.RegistrationViewModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -48,6 +49,36 @@ import com.codingub.hackathonproject.ui.viewmodels.RegistrationViewModel
 fun RegistrationScreen(
 ) {
     val viewModel = hiltViewModel<RegistrationViewModel>()
+    var message by rememberSaveable {
+    mutableStateOf("")
+    }
+    val state = viewModel.state
+    val context = LocalContext.current
+    LaunchedEffect(viewModel, context ) {
+        viewModel.authResults.collect(){result ->
+            when (result) {
+                is AuthResult.Authorized -> {
+                    message = "Вы успешно зарегистрированы."
+                }
+                is AuthResult.Unauthorized -> {
+                    message = "Ошибка авторизации: Неавторизованный доступ."
+                }
+                is AuthResult.BadRequest -> {
+                    message = "Ошибка запроса: Пожалуйста, проверьте введенные данные."
+                }
+                is AuthResult.NotFound -> {
+                    message = "Ошибка: Запрошенный ресурс не найден."
+                }
+                is AuthResult.Loading -> {
+                    message = "Подождите, идет обработка запроса..."
+                }
+                is AuthResult.UnknownError -> {
+                    message = "Произошла неизвестная ошибка. Попробуйте позже."
+                }
+
+            }
+        }
+    }
     var text_phone_number by rememberSaveable {
         mutableStateOf("+375")
     }
@@ -191,12 +222,12 @@ fun RegistrationScreen(
 
             Button(
                 onClick = {
-                    if (isPasswordValid(text_password) && isPhoneValid(text_phone_number) && isEqualPasswords(text_password, text_confirm_password)) {
+                   /* if (isPasswordValid(text_password) && isPhoneValid(text_phone_number) && isEqualPasswords(text_password, text_confirm_password)) {*/
                        viewModel.onEvent(RegistrationUiEvent.SignUp)
-                    } else {
+                   /* } else {
                         // плохой пароль
-                    }
-                },
+
+                }*/},
                 modifier = Modifier
                     .width(327.dp)
                     .height(54.dp)
@@ -206,8 +237,23 @@ fun RegistrationScreen(
                     )
 
             ) {
-Text(text = "Регистрация")
+                Text(text = "Регистрация")
             }
+            Spacer(
+                modifier = Modifier
+                    .height(20.dp)
+                    .fillMaxWidth()
+            )
+            Text(
+                text = message,
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontFamily = FontFamily(Font(R.font.monserrat_thin)),
+                    fontWeight = FontWeight(400),
+                    color = Color.White,
+
+                    )
+            )
         }
     }
 }

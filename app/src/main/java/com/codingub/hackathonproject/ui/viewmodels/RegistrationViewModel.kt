@@ -41,7 +41,8 @@ class RegistrationViewModel @Inject constructor(
 
             }
             is RegistrationUiEvent.UseInviteKey -> {
-                state = state.copy(inviteKey = event.value)
+                //val inviteKey = sharedViewModel.inviteKey
+                state = state.copy(inviteKey = "")
             }
             is RegistrationUiEvent.SignUp -> {
                 signUp()

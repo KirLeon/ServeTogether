@@ -26,4 +26,14 @@
     <string name="register_screen_transition">У вас нет аккаунта? Зарегистрироваться</string>
     <string name="login_screen_transition">У вас уже есть аккаунт? Войти</string>
 
+    <!-- Shop -->
+    <string name = "shop">Магазин</string>
+
+    <string name = "cap">Кепка</string>
+    <string name = "bag">Рюкзак</string>
+    <string name = "mug">Кружка</string>
+    <string name = "pen">Ручка</string>
+    <string name = "thermal_mug">Термокружка</string>
+    <string name = "tshirt">Майка</string>
+
 </resources>

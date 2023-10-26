@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class KeyRegistrationViewModel @Inject constructor(
-    private val provideInviteKey : ProvideInviteKeyUseCase
+    private val provideInviteKey : ProvideInviteKeyUseCase,
 ) : ViewModel() {
 
     var state by mutableStateOf(InviteKeyState())
@@ -30,6 +30,7 @@ class KeyRegistrationViewModel @Inject constructor(
     fun onEvent(event: InviteKeyEvent) {
         when (event) {
             is InviteKeyEvent.InviteKeyChanged -> {
+              //  sharedViewModel.inviteKey = event.value
                 state = state.copy(inviteKey = event.value)
             }
             is InviteKeyEvent.ProvideInviteKey -> {
