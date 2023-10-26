@@ -90,10 +90,11 @@ fun AnnouncementItem(
         modifier = Modifier
             .width(160.dp)
             .wrapContentHeight(Alignment.CenterVertically)
-            .background(Color.White)
             .padding(5.dp),
         shape = RoundedCornerShape(10.dp),
-
+        colors = CardDefaults.cardColors(
+        containerColor = Color.White
+)
 
     ) {
         Column (
@@ -132,7 +133,8 @@ fun AnnouncementItem(
                         color = Color.Black
                     )
                 )
-                Icon(painterResource(
+                Icon(
+                    painterResource(
                     id = R.drawable.coin),
                     contentDescription = null,
                     modifier = Modifier.padding(3.dp))

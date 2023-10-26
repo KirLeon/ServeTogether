@@ -1,19 +1,13 @@
 package com.codingub.hackathonproject.ui.navigation
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -44,7 +38,7 @@ fun BottomNavigationBar(/*navController: NavController*/) {
                 items.forEach { item ->
                     BottomNavigationItem(
                         icon = {
-                            item.icon?.let {
+                            item.icon.let {
                                 Icon(
                                     imageVector = it,
                                     contentDescription = null
@@ -67,7 +61,7 @@ fun BottomNavigationBar(/*navController: NavController*/) {
                 }
             }
         }
-    ) {padding ->
+    ) { padding ->
 
 
         NavHost(
@@ -82,7 +76,7 @@ fun BottomNavigationBar(/*navController: NavController*/) {
                 RegistrationScreen()
             }
             composable(NavigationItem.Groups.route) {
-                AnnouncementScreen()
+                AnnouncementScreen(navController)
             }
             composable(NavigationItem.Settings.route) {
                 KeyRegistrationScreen()
@@ -91,6 +85,6 @@ fun BottomNavigationBar(/*navController: NavController*/) {
         }
     }
 
-    }
+}
 
 
