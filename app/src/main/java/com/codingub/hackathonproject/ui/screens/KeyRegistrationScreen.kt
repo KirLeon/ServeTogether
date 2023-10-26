@@ -33,11 +33,12 @@ import com.codingub.hackathonproject.R
 import com.codingub.hackathonproject.ui.validation.isInviteKeyValid
 import com.codingub.hackathonproject.ui.viewmodels.InviteKeyEvent
 import com.codingub.hackathonproject.ui.viewmodels.KeyRegistrationViewModel
+import com.codingub.hackathonproject.ui.viewmodels.SharedViewModel
 
 
 @Composable
-fun CodeRegistrationScreen() {
-    val viewModel = hiltViewModel<KeyRegistrationViewModel>()
+fun KeyRegistrationScreen() {
+    val viewModel = hiltViewModel<SharedViewModel>()
     var invite_key by rememberSaveable {
         mutableStateOf("")
     }
@@ -59,7 +60,7 @@ fun CodeRegistrationScreen() {
             OutlinedTextField(
                 value = invite_key,
                 onValueChange = {
-                    viewModel.onEvent(InviteKeyEvent.InviteKeyChanged(it))
+                    /*viewModel.onEvent(InviteKeyEvent.InviteKeyChanged(it)*/)
                     invite_key = it },
                 placeholder = { Text(text = stringResource(R.string.placeholder_invite_key),
                     style = TextStyle(
@@ -84,7 +85,7 @@ fun CodeRegistrationScreen() {
             Button(
                 onClick = {
                     if (isInviteKeyValid(invite_key) ) {
-                        viewModel.onEvent(InviteKeyEvent.ProvideInviteKey)
+                        viewModel.setInviteKey(invite_key)
                     } else {
                         // плохой пароль
                     }

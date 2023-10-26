@@ -48,6 +48,7 @@ import com.codingub.hackathonproject.ui.viewmodels.RegistrationViewModel
 fun RegistrationScreen(
 ) {
     val viewModel = hiltViewModel<RegistrationViewModel>()
+
     var text_phone_number by rememberSaveable {
         mutableStateOf("+375")
     }
@@ -191,12 +192,12 @@ fun RegistrationScreen(
 
             Button(
                 onClick = {
-                    if (isPasswordValid(text_password) && isPhoneValid(text_phone_number) && isEqualPasswords(text_password, text_confirm_password)) {
+                   /* if (isPasswordValid(text_password) && isPhoneValid(text_phone_number) && isEqualPasswords(text_password, text_confirm_password)) {*/
                        viewModel.onEvent(RegistrationUiEvent.SignUp)
-                    } else {
+                   /* } else {
                         // плохой пароль
-                    }
-                },
+
+                }*/},
                 modifier = Modifier
                     .width(327.dp)
                     .height(54.dp)
@@ -206,7 +207,7 @@ fun RegistrationScreen(
                     )
 
             ) {
-Text(text = "Регистрация")
+                Text(text = "Регистрация")
             }
         }
     }
