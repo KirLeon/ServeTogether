@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
-    private val registration: RegisterUseCase,
-    private val sharedViewModel: SharedViewModel
+    private val registration: RegisterUseCase
 ) : ViewModel(){
 
    var state by mutableStateOf(RegisterState())
@@ -42,8 +41,8 @@ class RegistrationViewModel @Inject constructor(
 
             }
             is RegistrationUiEvent.UseInviteKey -> {
-                val inviteKey = sharedViewModel.inviteKey
-                state = state.copy(inviteKey = inviteKey)
+                //val inviteKey = sharedViewModel.inviteKey
+                state = state.copy(inviteKey = "")
             }
             is RegistrationUiEvent.SignUp -> {
                 signUp()

@@ -1,4 +1,4 @@
-package com.codingub.hackathonproject.ui.screens.Registration
+package com.codingub.hackathonproject.ui.screens.registration
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
