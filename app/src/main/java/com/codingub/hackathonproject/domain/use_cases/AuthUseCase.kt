@@ -35,7 +35,6 @@ class AuthUseCase @Inject constructor(private val repository: AuthRepository) {
 class ProvideInviteKeyUseCase @Inject constructor(private val repository: AuthRepository) {
 
     suspend operator fun invoke(parameters: InviteKeyRequest): ServerResponse<UserRole> {
-        Log.d("", "оно работает")
         return repository.provideInviteKey(request = parameters)
     }
 }

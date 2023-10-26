@@ -33,12 +33,13 @@ class KeyRegistrationViewModel @Inject constructor(
                 state = state.copy(inviteKey = event.value)
             }
             is InviteKeyEvent.ProvideInviteKey -> {
-                provideInviteKey()
+                provideKey()
             }
         }
     }
 
-    private fun provideInviteKey() {
+    private fun provideKey() {
+
         viewModelScope.launch {
             _resultChannel.send(ServerResponse.Loading(true))
             val result = provideInviteKey(

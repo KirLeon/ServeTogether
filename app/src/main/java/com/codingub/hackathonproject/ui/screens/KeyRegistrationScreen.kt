@@ -36,7 +36,7 @@ import com.codingub.hackathonproject.ui.viewmodels.KeyRegistrationViewModel
 
 
 @Composable
-fun CodeRegistrationScreen() {
+fun KeyRegistrationScreen() {
     val viewModel = hiltViewModel<KeyRegistrationViewModel>()
     var invite_key by rememberSaveable {
         mutableStateOf("")
