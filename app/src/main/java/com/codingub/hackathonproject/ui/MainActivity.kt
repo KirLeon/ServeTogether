@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.codingub.hackathonproject.ui.navigation.BottomNavigationBar
 import com.codingub.hackathonproject.ui.screens.announcements.AnnouncementScreen
+import com.codingub.hackathonproject.ui.screens.groups.GroupsScreen
 import com.codingub.hackathonproject.ui.screens.registration.RegistrationScreen
 import com.codingub.hackathonproject.ui.screens.shop.ShopScreen
 import com.codingub.hackathonproject.ui.screens.shop.shopItem
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
 
                 ) {
-                   ShopScreen(navController = navController)
+                   GroupsScreen(navController = navController)
                 }
             }
         }

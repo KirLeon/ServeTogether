@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.codingub.hackathonproject.ui.screens.AuthorizationScreen
 import com.codingub.hackathonproject.ui.screens.KeyRegistrationScreen
 import com.codingub.hackathonproject.ui.screens.announcements.AnnouncementScreen
+import com.codingub.hackathonproject.ui.screens.groups.GroupsScreen
 import com.codingub.hackathonproject.ui.screens.registration.RegistrationScreen
 
 @Composable
@@ -73,10 +74,10 @@ fun BottomNavigationBar(/*navController: NavController*/) {
                 AuthorizationScreen()
             }
             composable(NavigationItem.Shop.route) {
-                RegistrationScreen()
+
             }
             composable(NavigationItem.Groups.route) {
-                AnnouncementScreen(navController)
+                GroupsScreen(navController = navController)
             }
             composable(NavigationItem.Settings.route) {
                 KeyRegistrationScreen()
