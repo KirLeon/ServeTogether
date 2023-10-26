@@ -23,6 +23,7 @@
     <string name="login">Авторизоваться</string>
     <string name="authorization">Авторизация</string>
     <string name="authentication">Аутентификация</string>
+    <string name = "name_login">Имя пользователя</string>
 
     <string name="register_screen_transition">У вас нет аккаунта? Зарегистрироваться</string>
     <string name="login_screen_transition">У вас уже есть аккаунт? Войти</string>
@@ -45,7 +46,6 @@
 
     <!-- SearchBar -->
     <string name="search_bar">Поиск</string>
-
 
 
 </resources>
