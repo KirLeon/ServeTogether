@@ -44,8 +44,4 @@ class AnnouncementViewModel @Inject constructor(
             //
         }
     }
-
-
-
-
 }

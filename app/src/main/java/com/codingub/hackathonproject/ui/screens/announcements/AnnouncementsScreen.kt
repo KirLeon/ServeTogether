@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
@@ -49,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.codingub.hackathonproject.R
+import com.codingub.hackathonproject.data.remote.models.Announcement
 import com.codingub.hackathonproject.network.ServerResponse
 import com.codingub.hackathonproject.sdk.FragmentRoute
 import com.codingub.hackathonproject.ui.viewmodels.AnnouncementViewModel
@@ -61,16 +63,16 @@ fun MySpacer(height: Dp = 10.dp) {
         .height(height))
 }
 @Composable
-fun AnnouncementsGrid() {
+fun AnnouncementsGrid(announcements: List<Announcement>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.background(color = Color(0xFF1A182C))) {
-        items(20) { //
+        items(announcements) { announcement ->
             AnnouncementItem(
-                title = "Hello",
-                content = "ksadjhfkashdfjh h fkshfakjыфвпап выфdhf ahlsfs фывларо ро фылвдра рыдфлвра рм дфлвор",
-                data = "21.12.2003",
-                cost = 1800
+                title = announcement.title,
+                content = announcement.content,
+                data = announcement.expirationDate,
+                cost = announcement.price
             )
         }
     }
