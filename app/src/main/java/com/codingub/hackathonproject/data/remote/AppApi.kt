@@ -4,6 +4,7 @@ import com.codingub.hackathonproject.data.remote.requests.InviteKeyRequest
 import com.codingub.hackathonproject.data.remote.requests.LoginDataRequest
 import com.codingub.hackathonproject.data.remote.requests.RegisterDataRequest
 import com.codingub.hackathonproject.data.remote.responses.AuthorizedUserResponse
+import com.codingub.hackathonproject.data.remote.responses.UserRoleResponse
 import com.codingub.hackathonproject.network.EndPoints.AUTHENTICATE
 import com.codingub.hackathonproject.network.EndPoints.PROVIDE_INVITE_KEY
 import com.codingub.hackathonproject.network.EndPoints.SIGNIN
@@ -28,7 +29,7 @@ interface AppApi{
     @POST(SIGNIN)
     suspend fun signIn(
         @Body request : LoginDataRequest
-    ) : AuthorizedUserResponse
+    ): AuthorizedUserResponse
 
     @GET(AUTHENTICATE)
     suspend fun authenticate(
@@ -38,6 +39,6 @@ interface AppApi{
     @POST(PROVIDE_INVITE_KEY)
     suspend fun provideInviteKey(
         @Body request : InviteKeyRequest
-    )
+    ) : UserRoleResponse
 
 }
