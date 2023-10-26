@@ -1,9 +1,9 @@
 package com.codingub.hackathonproject.data.remote.requests
 
 data class AddAnnouncementRequest(
+    val title: String,
     val content: String,
-    val price: Long,
-    val title: String
+    val reward: Long
     )
 
 data class DeleteAnnouncementRequest(

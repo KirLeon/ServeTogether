@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.codingub.hackathonproject.sdk.FragmentRoute
 import com.codingub.hackathonproject.ui.screens.AuthorizationScreen
 import com.codingub.hackathonproject.ui.screens.KeyRegistrationScreen
+import com.codingub.hackathonproject.ui.screens.announcements.AnnouncementScreen
 import com.codingub.hackathonproject.ui.theme.HackathonProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = FragmentRoute.Login) { AuthorizationScreen(navController)}
                         composable(route = FragmentRoute.Register) { RegistrationScreen(navController)}
                         composable(route = FragmentRoute.InviteKey) { KeyRegistrationScreen(navController) }
-                        composable(route = FragmentRoute.Announcement) { AuthorizationScreen(navController)}
+                        composable(route = FragmentRoute.Announcement) { AnnouncementScreen(navController)}
                     }
                 }
             }
