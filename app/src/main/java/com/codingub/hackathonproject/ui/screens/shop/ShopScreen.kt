@@ -1,5 +1,6 @@
 package com.codingub.hackathonproject.ui.screens.shop
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.codingub.hackathonproject.R
-
+/*
 val resourceNames = listOf(
     R.string.shop,
     R.string.cap,
@@ -38,11 +40,19 @@ val resourceNames = listOf(
     R.string.thermal_mug,
     R.string.tshirt
 )
-
+*/
 @Composable
 fun ShopScreen(
     navController: NavController
 ) {
+    val list = listOf(
+        R.drawable.cap,
+        R.drawable.bag,
+        R.drawable.mug,
+        R.drawable.pen,
+        R.drawable.thermal_mug,
+        R.drawable.tshirt
+    )
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -53,10 +63,11 @@ fun ShopScreen(
         Spacer(modifier = Modifier
             .fillMaxWidth()
             .height(20.dp))
-        Row(modifier = Modifier
-            .fillMaxWidth(0.9f)
-            .height(100.dp)
-            .padding(20.dp),
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .height(100.dp)
+                .padding(20.dp),
             horizontalArrangement = Arrangement.SpaceBetween){
             Text(text = stringResource(id = R.string.shop),
                 style = TextStyle(
@@ -79,14 +90,15 @@ fun ShopScreen(
                 Spacer(modifier = Modifier.width(10.dp))
 
             }
+
             Image(painter = painterResource(id = R.drawable.coin), contentDescription = "coin")
         }
 
         Column (
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            repeat(resourceNames.size) {
-                shopItem()
+            list.forEach { it
+                shopItem(paint = it)
                 Spacer(modifier = Modifier.fillMaxWidth().height(10.dp))
             }
         }

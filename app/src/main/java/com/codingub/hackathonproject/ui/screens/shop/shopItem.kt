@@ -1,7 +1,9 @@
 package com.codingub.hackathonproject.ui.screens.shop
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,12 +40,17 @@ import com.codingub.hackathonproject.R
 
 @Composable
 fun shopItem(
+    @DrawableRes paint: Int
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth(0.9f)
             .wrapContentHeight(Alignment.CenterVertically)
-            .padding(5.dp),
+            .padding(5.dp)
+            .height(50.dp)
+            .clickable {
+
+            },
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -55,7 +62,7 @@ fun shopItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
-                painter = painterResource(id = R.drawable.cap),
+                painter = painterResource(id = paint),
                 contentDescription = null,
                 modifier = Modifier.padding(20.dp)
             )
@@ -78,11 +85,15 @@ fun shopItem(
                 Text(text = "dfkjgsharghpaeeh hevhaip rhgfph iph siph g",)
             }
 
-            Image(
-                painter = painterResource(id = R.drawable.coin),
-                contentDescription = null,
-                modifier = Modifier.padding(20.dp)
-            )
+
+                Text(text = "1800")
+                Image(
+                    painter = painterResource(id = R.drawable.coin),
+                    contentDescription = null,
+                    modifier = Modifier.padding(20.dp)
+                )
+
+
         }
 
     }
