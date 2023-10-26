@@ -42,7 +42,6 @@ import com.codingub.hackathonproject.ui.screens.UpperScreen
 import com.codingub.hackathonproject.ui.validation.isEqualPasswords
 import com.codingub.hackathonproject.ui.validation.isPhoneValid
 import com.codingub.hackathonproject.ui.viewmodels.RegistrationViewModel
-import com.codingub.hackathonproject.utils.Resource
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -73,7 +72,7 @@ fun RegistrationScreen(
         ) {
 
             UpperScreen()
-            Text(text = Resource.string(R.string.register))
+            Text(text = stringResource(id = R.string.registration))
             Spacer(
                 modifier = Modifier
                     .height(18.dp)
@@ -127,7 +126,7 @@ fun RegistrationScreen(
                     }
                 },
                 supportingText = {
-                    Text(text = "*подтвердите пароль")
+                    Text(text = stringResource(id = R.string.placeholder_check_password))
                 },
 
                 placeholder = {
@@ -207,7 +206,7 @@ fun RegistrationScreen(
                     )
 
             ) {
-Text(text = Resource.string(R.string.registration))
+Text(text = "Регистрация")
             }
         }
     }

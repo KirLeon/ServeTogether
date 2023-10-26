@@ -28,12 +28,16 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.codingub.hackathonproject.R
 import com.codingub.hackathonproject.ui.validation.isInviteKeyValid
+import com.codingub.hackathonproject.ui.viewmodels.InviteKeyEvent
+import com.codingub.hackathonproject.ui.viewmodels.KeyRegistrationViewModel
 
 
 @Composable
 fun CodeRegistrationScreen() {
+    val viewModel = hiltViewModel<KeyRegistrationViewModel>()
     var invite_key by rememberSaveable {
         mutableStateOf("")
     }
@@ -49,10 +53,14 @@ fun CodeRegistrationScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             UpperScreen()
-            Spacer(modifier = Modifier.fillMaxWidth().height(20.dp))
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp))
             OutlinedTextField(
                 value = invite_key,
-                onValueChange = { invite_key = it },
+                onValueChange = {
+                    viewModel.onEvent(InviteKeyEvent.InviteKeyChanged(it))
+                    invite_key = it },
                 placeholder = { Text(text = stringResource(R.string.placeholder_invite_key),
                     style = TextStyle(
                     fontSize = 14.sp,
@@ -70,11 +78,13 @@ fun CodeRegistrationScreen() {
                         shape = RoundedCornerShape(10.dp)
                     )
             )
-            Spacer(modifier = Modifier.fillMaxWidth().height(15.dp))
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .height(15.dp))
             Button(
                 onClick = {
                     if (isInviteKeyValid(invite_key) ) {
-                        
+                        viewModel.onEvent(InviteKeyEvent.ProvideInviteKey)
                     } else {
                         // плохой пароль
                     }
