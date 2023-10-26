@@ -7,6 +7,7 @@ import com.codingub.hackathonproject.data.remote.requests.LoginDataRequest
 import com.codingub.hackathonproject.data.remote.requests.RegisterDataRequest
 import com.codingub.hackathonproject.network.AuthResult
 import com.codingub.hackathonproject.network.ServerResponse
+import com.codingub.hackathonproject.sdk.UserRole
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ import javax.inject.Inject
  */
 interface AuthRepository {
 
-    suspend fun provideInviteKey(request: InviteKeyRequest) : ServerResponse<Unit>
+    suspend fun provideInviteKey(request: InviteKeyRequest) : ServerResponse<UserRole>
     suspend fun signUp(request: RegisterDataRequest): AuthResult<Unit>
     suspend fun signIn(request: LoginDataRequest): AuthResult<Unit>
     suspend fun authenticate(): AuthResult<Unit>
@@ -26,10 +27,10 @@ class AuthRepositoryImpl @Inject constructor(
     private val api: AppApi
 ) : AuthRepository{
 
-    override suspend fun provideInviteKey(request: InviteKeyRequest) : ServerResponse<Unit> {
+    override suspend fun provideInviteKey(request: InviteKeyRequest) : ServerResponse<UserRole> {
         return try {
-            api.provideInviteKey(request)
-            ServerResponse.OK()
+            val role = api.provideInviteKey(request).role
+            ServerResponse.OK(UserRole.valueOf(role))
         } catch (e: HttpException){
            if (e.code() == 400) {
                 ServerResponse.BadRequest(e.response()?.errorBody()?.string() ?: "Unknown error")
@@ -73,9 +74,7 @@ class AuthRepositoryImpl @Inject constructor(
                 setToken(response.authToken)
                 setUsername(response.username)
                 setPhoneNumber(response.phoneNumber)
-
-                //test!!!
-                setUserRole(response.userRole)
+                setCoins(response.coins)
             }
 
             AuthResult.Authorized()

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.codingub.hackathonproject.ui.screens.AuthorizationScreen
 import com.codingub.hackathonproject.ui.screens.CodeRegistrationScreen
+import com.codingub.hackathonproject.ui.screens.Registration.RegistrationScreen
 import com.codingub.hackathonproject.ui.theme.HackathonProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
 
                 ) {
-                    CodeRegistrationScreen()
+                    RegistrationScreen()
                 }
             }
         }

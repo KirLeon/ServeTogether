@@ -13,6 +13,7 @@ object UserConfig {
 
     private val key_user_username = "user_username"
     private val key_user_phonenumber = "user_phonenumber"
+    private val key_user_coins = "user_coins"
 
     private val prefs: SharedPreferences =
         MainApp.getInstance().getSharedPreferences(
@@ -31,10 +32,11 @@ object UserConfig {
         token = value
         editor.putString(key_user_token, token).commit()
     }
+
     /*
         Username
      */
-    private var username : String = ""
+    private var username: String = ""
 
     fun getUsername(): String = prefs.getString(key_user_username, "") ?: ""
     fun setUsername(value: String) {
@@ -45,7 +47,7 @@ object UserConfig {
     /*
         PhoneNumber
      */
-    private var phoneNumber : String = ""
+    private var phoneNumber: String = ""
 
     fun getPhoneNumber(): String = prefs.getString(key_user_phonenumber, "") ?: ""
     fun setPhoneNumber(value: String) {
@@ -56,12 +58,23 @@ object UserConfig {
     /*
         UserRole
      */
-    private var savedUserRole : MutableLiveData<UserRole> =
+    private var savedUserRole: MutableLiveData<UserRole> =
         MutableLiveData(UserRole.valueOf(prefs.getString(key_user_type, UserRole.VOLUNTEER.name)!!))
 
-    fun getUserRole() : UserRole = savedUserRole.value!!
-    fun setUserRole(userRole: UserRole){
+    fun getUserRole(): UserRole = savedUserRole.value!!
+    fun setUserRole(userRole: UserRole) {
         savedUserRole.value = userRole
         editor.putString(key_user_type, userRole.name).apply()
+    }
+
+    /*
+        Coins
+     */
+    private var savedCoins: Long = 0L
+
+    fun getCoins(): Long = prefs.getLong(key_user_coins, 0L)
+    fun setCoins(value: Long) {
+        savedCoins = value
+        editor.putLong(key_user_coins, savedCoins)
     }
 }

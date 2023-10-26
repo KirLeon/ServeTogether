@@ -36,7 +36,6 @@ class LoginViewModel @Inject constructor(
             is LoginUiEvent.SignIn -> {
                 signIn()
             }
-            else -> {}
         }
     }
 

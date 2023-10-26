@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.codingub.hackathonproject.data.remote.requests.InviteKeyRequest
 import com.codingub.hackathonproject.domain.use_cases.ProvideInviteKeyUseCase
 import com.codingub.hackathonproject.network.ServerResponse
+import com.codingub.hackathonproject.sdk.UserRole
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -22,7 +23,7 @@ class KeyRegistrationViewModel @Inject constructor(
 
     var state by mutableStateOf(InviteKeyState())
 
-    private val _resultChannel = Channel<ServerResponse<Unit>>()
+    private val _resultChannel = Channel<ServerResponse<UserRole>>()
     val authResults = _resultChannel.receiveAsFlow()
 
 
