@@ -43,5 +43,9 @@
     <string name="status_finished" translatable="false">FINISHED</string>
     <string name="status_in_progress" translatable="false">IN_PROGRESS</string>
 
+    <!-- SearchBar -->
+    <string name="search_bar">Поиск</string>
+
+
 
 </resources>
