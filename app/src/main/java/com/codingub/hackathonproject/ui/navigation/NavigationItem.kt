@@ -8,10 +8,10 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
 
-sealed class NavigationItem(val route: String, var icon: ImageVector, var title: String) {
-    object Shop: NavigationItem("shop", Icons.Default.ShoppingCart, "")
-    object Home: NavigationItem("home", Icons.Default.Home, "")
-    object Settings: NavigationItem("settings", Icons.Default.Settings, "")
-    object Groups: NavigationItem("groups", Icons.Default.Add, "")
+sealed class NavigationItem(val route: String, var icon: ImageVector) {
+    object Shop: NavigationItem("shop", Icons.Default.ShoppingCart)
+    object Home: NavigationItem("home", Icons.Default.Home)
+    object Settings: NavigationItem("settings", Icons.Default.Settings)
+    object Groups: NavigationItem("groups", Icons.Default.Add)
 
 }
