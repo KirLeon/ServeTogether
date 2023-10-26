@@ -25,7 +25,7 @@ class RegisterUseCase @Inject constructor(private val repository: AuthRepository
 
 }
 
-class AuthUseCase @Inject constructor(private val repository: AuthRepository) {
+class AuthUseCase @Inject constructor(private val repository: AuthRepository){
 
     suspend operator fun invoke(): AuthResult<Unit> {
         return repository.authenticate()

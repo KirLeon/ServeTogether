@@ -8,6 +8,7 @@ import com.codingub.hackathonproject.data.remote.models.Announcement
 import com.codingub.hackathonproject.domain.use_cases.AddAnnouncementUseCase
 import com.codingub.hackathonproject.domain.use_cases.GetAllAnnouncementsUseCase
 import com.codingub.hackathonproject.domain.use_cases.GetAnnouncementByIdUseCase
+import com.codingub.hackathonproject.domain.use_cases.GetAnnouncementSearchUseCase
 import com.codingub.hackathonproject.network.AuthResult
 import com.codingub.hackathonproject.network.ServerResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AnnouncementViewModel @Inject constructor(
-    private val getAllAnnouncementsUseCase: GetAllAnnouncementsUseCase
+    private val getAllAnnouncementsUseCase: GetAllAnnouncementsUseCase,
+    private val getAnnouncementByIdUseCase: GetAnnouncementByIdUseCase, //будет при выборе (коммуникация фрагментов)
+    private val getAnnouncementSearchUseCase: GetAnnouncementSearchUseCase //!!!!!! добавить для searchBar
 ) : ViewModel() {
 
     var announcements: MutableState<List<Announcement>> = mutableStateOf<List<Announcement>>(
@@ -35,14 +38,7 @@ class AnnouncementViewModel @Inject constructor(
             _resultChannel.send(ServerResponse.Loading(true))
             val result = getAllAnnouncementsUseCase()
             _resultChannel.send(result)
-
-           // НЕОБХОДИМО ДОБАВИТЬ В is ServerResponse.OnSuccess -> {
-        // announcements.value = result.data!! }
-            //
         }
     }
-
-
-
 
 }

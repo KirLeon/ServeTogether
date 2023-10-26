@@ -6,9 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingub.hackathonproject.data.remote.requests.LoginDataRequest
+import com.codingub.hackathonproject.domain.use_cases.AuthUseCase
 import com.codingub.hackathonproject.domain.use_cases.LoginUseCase
 import com.codingub.hackathonproject.network.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -16,13 +18,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val login: LoginUseCase
+    private val login: LoginUseCase,
+    private val authenticate: AuthUseCase
 ) : ViewModel(){
 
     var state by mutableStateOf(LoginState())
 
     private val _resultChannel = Channel<AuthResult<Unit>>()
     val authResults = _resultChannel.receiveAsFlow()
+
+    init{
+        auth()
+    }
 
 
     fun onEvent(event: LoginUiEvent) {
@@ -40,7 +47,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun signIn() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO)  {
             _resultChannel.send(AuthResult.Loading(true))
             val result = login(
                 LoginDataRequest(
@@ -48,6 +55,14 @@ class LoginViewModel @Inject constructor(
                     password = state.signInPassword
                 )
             )
+            _resultChannel.send(result)
+        }
+    }
+
+    private fun auth() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _resultChannel.send(AuthResult.Loading(true))
+            val result = authenticate()
             _resultChannel.send(result)
         }
     }
