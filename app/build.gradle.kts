@@ -83,6 +83,8 @@ dependencies {
 
     //compose
     implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha12")
+    implementation ("androidx.compose.material:material:1.5.4")
 
     compose()
     hilt()

@@ -10,7 +10,7 @@ fun isEqualPasswords(first: String, second: String) : Boolean {
 }
 
 fun isPhoneValid(phone: String): Boolean {
-    return phone.length == 9
+    return phone.startsWith("+375") && phone.length == 13
 }
 
 fun isInviteKeyValid(key: String): Boolean {
