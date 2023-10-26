@@ -4,6 +4,8 @@ object Versions {
     const val composeMaterial3 = "1.1.1"
     const val composeCompiler = "1.4.6"
     const val hilt = "2.48"
+    const val hiltCompose = "1.0.0"
+    const val hiltNavigation = "1.1.0-alpha01"
     const val room = "2.6.0-rc01"
     const val coroutines = "1.7.3"
     const val viewModel = "2.6.2"

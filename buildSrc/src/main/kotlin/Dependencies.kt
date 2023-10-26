@@ -12,6 +12,8 @@ object Dependencies {
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
     const val hiltAgp = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
+    const val hiltCompose = "androidx.hilt:hilt-work:${Versions.hiltCompose}"
+    const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigation}"
 
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
@@ -39,7 +41,7 @@ object Dependencies {
     const val glideCompose = "com.github.bumptech.glide:compose:${Versions.glideCompose}"
 
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
-    const val shimmerEffect = "androidx.core:core-splashscreen:${Versions.shimmerEffect}"
+    const val shimmerEffect = "com.facebook.shimmer:shimmer:${Versions.shimmerEffect}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
 }
 
@@ -70,7 +72,9 @@ fun DependencyHandler.compose() {
 
 fun DependencyHandler.hilt() {
     implementation(Dependencies.hiltAndroid)
+    implementation(Dependencies.hiltCompose)
     kapt(Dependencies.hiltCompiler)
+    implementation(Dependencies.hiltNavigation)
 }
 
 fun DependencyHandler.viewModel() {

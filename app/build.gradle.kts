@@ -69,6 +69,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
@@ -79,16 +80,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    implementation("androidx.hilt:hilt-work:1.0.0")
-            //   kapt("androidx.hilt:hilt-compiler:1.0.0")
-
-    val lifecycle_version = "2.6.2"
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
-    implementation ("com.google.dagger:hilt-android:2.47")
-            //kapt ("com.google.dagger:hilt-compiler:2.47")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
 
     compose()
     hilt()

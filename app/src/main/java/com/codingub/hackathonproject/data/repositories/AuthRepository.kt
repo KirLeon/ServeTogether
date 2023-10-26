@@ -70,7 +70,7 @@ class AuthRepositoryImpl @Inject constructor(
             val response = api.signIn(request)
 
             UserConfig.apply {
-                setToken(response.token)
+                setToken(response.authToken)
                 setUsername(response.username)
                 setPhoneNumber(response.phoneNumber)
 

@@ -30,7 +30,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codingub.hackathonproject.R
@@ -61,11 +60,13 @@ fun AuthorizationScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             UpperScreen()
-        Spacer(modifier = Modifier.fillMaxWidth().height(15.dp))
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .height(15.dp))
             OutlinedTextField(
                 value = text_login,
                 onValueChange = { text_login = it },
-                placeholder = { Text(text = "Login",
+                placeholder = { Text(text = stringResource(id = R.string.login),
                     style = TextStyle(
                     fontSize = 14.sp,
                     fontFamily = FontFamily(Font(R.font.monserrat_thin)),
@@ -93,7 +94,7 @@ fun AuthorizationScreen(
                         text_password = it
                     } },
                 supportingText = {
-                    Text(stringResource(R.string.support_text_password))
+                    Text(stringResource(R.string.placeholder_error_password))
                 },
                 placeholder = {
                     Text(text = "Password",
@@ -148,7 +149,7 @@ fun AuthorizationScreen(
             Spacer(modifier = Modifier
                 .fillMaxWidth()
                 .height(15.dp))
-            Text(text = "У вас нету аккаунта?")
+            Text(text = stringResource(id = R.string.register_screen_transition))
             Spacer(modifier = Modifier
                 .fillMaxWidth()
                 .height(15.dp)
@@ -166,7 +167,7 @@ fun AuthorizationScreen(
                     )
             ) {
                 Text(
-                    text = "Зарегистрироваться",
+                    text = stringResource(id = R.string.register),
                     color = Color(62, 131, 235, 1),
                     fontSize = 14.sp
                 )
@@ -187,8 +188,8 @@ fun UpperScreen() {
         .fillMaxWidth())
 
     Text(
-        text = "ServeTogether",
-        style = androidx.compose.ui.text.TextStyle(
+        text = stringResource(id = R.string.app_name),
+        style = TextStyle(
             fontSize = 30.sp,
             fontFamily = FontFamily(Font(R.font.monserrat_bold)),
             fontWeight = FontWeight(800),
@@ -202,8 +203,8 @@ fun UpperScreen() {
         .height(20.dp))
 
     Text(
-        text = "Будь волонтером!",
-        style = androidx.compose.ui.text.TextStyle(
+        text = stringResource(id = R.string.app_info),
+        style = TextStyle(
             fontSize = 14.sp,
             fontFamily = FontFamily(Font(R.font.monserrat_semibold)),
             fontWeight = FontWeight(400),
