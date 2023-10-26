@@ -17,6 +17,7 @@
     <string name="placeholder_error_password">Пароль должен занимать  минимум 6 символов</string>
     <string name="placeholder_empty_error">Ни одно поле не должно быть пустым</string>
 
+    <string name="invite_key">Ввести пригласительный код</string>
     <string name="register">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
     <string name="login">Авторизоваться</string>
@@ -27,13 +28,20 @@
     <string name="login_screen_transition">У вас уже есть аккаунт? Войти</string>
 
     <!-- Shop -->
-    <string name = "shop">Магазин</string>
+    <string name="shop">Магазин</string>
 
-    <string name = "cap">Кепка</string>
-    <string name = "bag">Рюкзак</string>
-    <string name = "mug">Кружка</string>
-    <string name = "pen">Ручка</string>
-    <string name = "thermal_mug">Термокружка</string>
-    <string name = "tshirt">Майка</string>
+    <string name="cap">Кепка</string>
+    <string name="bag">Рюкзак</string>
+    <string name="mug">Кружка</string>
+    <string name="pen">Ручка</string>
+    <string name="thermal_mug">Термокружка</string>
+    <string name="tshirt">Майка</string>
+
+    <!-- Announcement -->
+    <string name="status_available" translatable="false">AVAILABLE</string>
+    <string name="status_pending" translatable="false">PENDING</string>
+    <string name="status_finished" translatable="false">FINISHED</string>
+    <string name="status_in_progress" translatable="false">IN_PROGRESS</string>
+
 
 </resources>

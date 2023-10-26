@@ -30,7 +30,6 @@ class KeyRegistrationViewModel @Inject constructor(
     fun onEvent(event: InviteKeyEvent) {
         when (event) {
             is InviteKeyEvent.InviteKeyChanged -> {
-              //  sharedViewModel.inviteKey = event.value
                 state = state.copy(inviteKey = event.value)
             }
             is InviteKeyEvent.ProvideInviteKey -> {

@@ -40,7 +40,7 @@ interface AppApi{
 
     @GET(AUTHENTICATE)
     suspend fun authenticate(
-        @Header("Authorization") token: String
+        @Header("authToken") token: String
     )
 
     @POST(PROVIDE_INVITE_KEY)
@@ -54,7 +54,7 @@ interface AppApi{
 
     @GET(ANNOUNCEMENT)
     suspend fun getAnnouncements(
-        @Header("Authorization") token: String
+        @Header("authToken") token: String
     ) : GetAnnouncementResponse
 
     @POST(ADD_ANNOUNCEMENT)
@@ -73,7 +73,7 @@ interface AppApi{
 
     @GET(MARKET)
     suspend fun getMarkets(
-        @Header("Authorization") token: String
+        @Header("authToken") token: String
     )
 
 }

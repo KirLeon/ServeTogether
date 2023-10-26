@@ -1,10 +1,11 @@
 package com.codingub.hackathonproject.data.remote.models
 
+import java.util.Date
+
 data class Announcement(
-    val id: Long,
-    val status: String,
+    val title: String,
     val content: String,
-    val reward: Long,
-    //val exparationDate: String,
-    val groupId: Long
+    val expirationDate: Date,
+    val price: Long,
+    val status: Long //AnnouncementStatus
 )
