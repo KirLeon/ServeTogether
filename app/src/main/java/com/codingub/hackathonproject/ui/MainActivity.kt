@@ -5,15 +5,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.codingub.hackathonproject.ui.screens.AuthorizationScreen
-import com.codingub.hackathonproject.ui.screens.CodeRegistrationScreen
-import com.codingub.hackathonproject.ui.screens.Registration.RegistrationScreen
+import com.codingub.hackathonproject.ui.screens.registration.RegistrationScreen
+import com.codingub.hackathonproject.ui.screens.shop.ShopScreen
+import com.codingub.hackathonproject.ui.screens.shop.shopItem
 import com.codingub.hackathonproject.ui.theme.HackathonProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
 
                 ) {
-                    RegistrationScreen()
+                    ShopScreen()
                 }
             }
         }
