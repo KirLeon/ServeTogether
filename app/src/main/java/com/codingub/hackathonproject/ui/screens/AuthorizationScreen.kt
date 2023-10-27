@@ -169,6 +169,7 @@ fun AuthorizationScreen(
 @Composable
 fun MyTextField(
     value: String,
+
     onValueChange: (String) -> Unit = {},
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     supportingText: @Composable (() -> Unit)? = null,
@@ -192,11 +193,7 @@ fun MyTextField(
     MySpacer()
 }
 
-@Preview(showBackground = false)
-@Composable
-fun MyTextFieldPreview() {
-    MyTextField(value = "Slava")
-}
+
 
 @Composable
 fun MySpacer() {
