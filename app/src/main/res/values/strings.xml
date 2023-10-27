@@ -1,3 +1,66 @@
 <resources>
-    <string name="app_name">HackathonProject</string>
+    <!-- -->
+    <string name="app_name">ServeTogether</string>
+    <string name="app_info">Будь волонтером!</string>
+
+    <!-- UserRole -->
+    <string name="volunteer" translatable="false">VOLUNTEER</string>
+    <string name="admin" translatable="false">ADMIN</string>
+
+    <!-- Auth -->
+    <string name="placeholder_username">Ввести имя пользователя</string>
+    <string name="placeholder_phonenumber">Ввести номер телефона</string>
+    <string name="placeholder_password">Ввести пароль</string>
+    <string name="placeholder_check_password">Подтвердить пароль*</string>
+    <string name="placeholder_invite_key">Пригласительный код</string>
+
+    <string name="placeholder_error_password">Пароль должен занимать  минимум 6 символов</string>
+    <string name="placeholder_empty_error">Ни одно поле не должно быть пустым</string>
+
+    <string name="invite_key">Ввести пригласительный код</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="registration">Регистрация</string>
+    <string name="login">Авторизоваться</string>
+    <string name="authorization">Авторизация</string>
+    <string name="authentication">Аутентификация</string>
+    <string name = "name_login">Имя пользователя</string>
+
+    <string name="register_screen_transition">У вас нет аккаунта? Зарегистрироваться</string>
+    <string name="login_screen_transition">У вас уже есть аккаунт? Войти</string>
+
+    <!-- Shop -->
+    <string name="shop">Магазин</string>
+
+    <string name="cap">Кепка</string>
+    <string name="bag">Рюкзак</string>
+    <string name="mug">Кружка</string>
+    <string name="pen">Ручка</string>
+    <string name="thermal_mug">Термокружка</string>
+    <string name="tshirt">Майка</string>
+
+    <!-- Announcement -->
+    <string name="status_available" translatable="false">AVAILABLE</string>
+    <string name="status_pending" translatable="false">PENDING</string>
+    <string name="status_finished" translatable="false">FINISHED</string>
+    <string name="status_in_progress" translatable="false">IN_PROGRESS</string>
+    <string name ="confirm">Подтвердить</string>
+    <string name="refuse">Отклонить</string>
+
+    <string name="new_announcement">Создайте новое объявление</string>
+
+    <!-- SearchBar -->
+    <string name="search_bar">Поиск</string>
+
+    <!-- Groups -->
+    <string name = "create_group">Создать группу</string>
+    <string name ="join_to_group">Присоединится к группе</string>
+    <string name="groups">Группы</string>
+
+    <!-- Settings -->
+    <string name = "settings">Настройки</string>
+    <string name = "contact_info">Личная информация</string>
+    <string name = "feedback">Отзыв</string>
+
+
+
 </resources>
