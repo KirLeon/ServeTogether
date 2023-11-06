@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.codingub.hackathonproject.sdk.FragmentRoute
 import com.codingub.hackathonproject.ui.screens.AuthorizationScreen
 import com.codingub.hackathonproject.ui.screens.KeyRegistrationScreen
+import com.codingub.hackathonproject.ui.screens.announcements.AddAnnouncementScreen
 import com.codingub.hackathonproject.ui.screens.announcements.AnnouncementScreen
 import com.codingub.hackathonproject.ui.screens.registration.RegistrationScreen
 import com.codingub.hackathonproject.ui.theme.HackathonProjectTheme
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
 
                     ) {
 
-                    NavHost(
+                    /*NavHost(
                         navController,
                         startDestination = FragmentRoute.Login
                     ) {
@@ -64,8 +65,8 @@ class MainActivity : ComponentActivity() {
                                 navController = navController
                             )
                         }
-                    }
-
+                    }*/
+                AddAnnouncementScreen()
                 }
             }
         }
