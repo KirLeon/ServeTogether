@@ -47,7 +47,16 @@
     <string name="refuse">Отклонить</string>
 
     <string name="new_announcement">Создайте новое объявление</string>
+    <string name = "create">Создать</string>
+    <string name = "create_new_announcement">Создайте новое\nобъявление</string>
 
+    <string name = "name">Название</string>
+    <string name = "description">Описание</string>
+    <string name = "sum">Сумма</string>
+
+    <string name = "download_image">Загрузить изображение</string>
+    <string name = "created">Созданные</string>
+    <string name = "download">Загрузить</string>
     <!-- SearchBar -->
     <string name="search_bar">Поиск</string>
 
